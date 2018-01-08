@@ -14,12 +14,15 @@ public class Book {
 
     private int mPageCount;
 
+    private String mThumbnailUrl;
 
-    public Book(String Title, String Author, String Url, int pageCount){
+
+    public Book(String Title, String Author, String Url, int pageCount, String thumbnailUrl){
         mTitle = Title;
         mAuthor= Author;
         mUrl = Url;
         mPageCount = pageCount;
+        mThumbnailUrl = thumbnailUrl;
 
     }
 
@@ -31,5 +34,7 @@ public class Book {
     public String getUrl(){return mUrl;}
 
     public int getPageCount(){return mPageCount;}
+
+    public String getThumbnailUrl(){return mThumbnailUrl;}
 
 }

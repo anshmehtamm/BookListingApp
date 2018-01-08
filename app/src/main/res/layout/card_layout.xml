@@ -59,6 +59,6 @@
             android:textColor="@color/textColorPrice"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            tools:text="FREE"/>
+            tools:text="182"/>
 
     </RelativeLayout>

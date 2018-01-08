@@ -148,29 +148,53 @@ public class QueryUtils  {
             JSONObject baseJsonResponse = new JSONObject(booksJson);
             JSONArray booksArray = baseJsonResponse.getJSONArray("items");
 
-            for(int i=0;i<booksArray.length();i++){
+            for(int i=0;i<booksArray.length();i++) {
 
                 JSONObject currentBook = booksArray.getJSONObject(i);
                 JSONObject volumeInfo = currentBook.getJSONObject("volumeInfo");
-                JSONArray authorsArray = currentBook.getJSONArray("authors");
-                String authora = "";
+                String title = volumeInfo.getString("title");
 
-                for(int j=0;j<authorsArray.length();j++){
-                    authora = authorsArray.getString(j);
-                    // TODO: Parse for more Authors and append into one string
+                JSONArray bookAuthors = null;
+                try {
+                    bookAuthors = volumeInfo.getJSONArray("authors");
+                } catch (JSONException ignored) {
+                }
+                // Convert the authors to a string
+                String bookAuthorsString ;
+                // If the author is empty, set it as "Unknown"
+                if (bookAuthors == null) {
+                    bookAuthorsString = "Unknown";
+                } else {
+                    // Format the authors as "author1, author2, and author3"
+                    int countAuthors = bookAuthors.length();
+                    bookAuthorsString = "";
+                    for (int e = 0; e < countAuthors; e++) {
+                        String author = bookAuthors.getString(e);
+                        if (bookAuthorsString.isEmpty()) {
+                            bookAuthorsString = author;
+                        } else if (e == countAuthors - 1) {
+                            bookAuthorsString = bookAuthorsString + " and " + author;
+                        } else {
+                            bookAuthorsString = bookAuthorsString + ", " + author;
+                        }
+                    }
+
+
+                    int pageCount = volumeInfo.getInt("pageCount");
+                    String url = volumeInfo.getString("infoLink");
+
+                    JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
+                    String thumbnailUrl = imageLinks.getString("smallThumbnail");
+
+
+
+                    Book book = new Book(title, bookAuthorsString, url, pageCount,thumbnailUrl);
+
+                    books.add(book);
                 }
 
-                String title = volumeInfo.getString("title");
-                int pageCount = volumeInfo.getInt("pageCount");
-                String url = volumeInfo.getString("infoLink");
 
-                Book book =  new Book(title,authora,url,pageCount);
-
-                books.add(book);
             }
-
-
-
         }catch (JSONException e){
             Log.e("QueryUtils","Problem parsing JSON",e);
         }
