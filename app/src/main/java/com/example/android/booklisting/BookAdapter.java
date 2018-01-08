@@ -27,6 +27,11 @@ public class BookAdapter extends ArrayAdapter<Book> {
                     R.layout.card_layout, parent, false);
         }
 
+        Book currentBook = getItem(position);
+
+
+
+
         return listItemView;
     }
 }

@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="120dp"
-    android:id="@+id/card_view"
-    android:layout_margin="5dp"
-    card_view:cardCornerRadius="4dp"
-    card_view:cardElevation="22dp"
-    card_view:contentPadding="4dp"
-    android:foreground="?selectableItemBackground"
-    android:clickable="true" >
+<!--<android.support.v7.widget.CardView-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="120dp"-->
+    <!--android:id="@+id/card_view"-->
+    <!--android:layout_margin="5dp"-->
+    <!--card_view:cardCornerRadius="4dp"-->
+    <!--card_view:cardElevation="22dp"-->
+    <!--card_view:contentPadding="4dp"-->
+    <!--android:foreground="?selectableItemBackground"-->
+    <!--android:clickable="true" >-->
 
     <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp" >
@@ -60,4 +62,3 @@
             tools:text="FREE"/>
 
     </RelativeLayout>
-</android.support.v7.widget.CardView>
