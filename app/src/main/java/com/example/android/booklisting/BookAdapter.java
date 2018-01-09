@@ -1,19 +1,32 @@
 package com.example.android.booklisting;
 
+import android.app.LoaderManager;
 import android.content.Context;
+import android.content.Loader;
+import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
+
+import static android.R.attr.bitmap;
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
 
 /**
  * Created by hp2 on 07-01-2018.
  */
 
-public class BookAdapter extends ArrayAdapter<Book> {
+public class BookAdapter extends ArrayAdapter<Book>    {
+
+
 
     public BookAdapter(Context context, List<Book> earthquakes) {
         super(context, 0, earthquakes);
@@ -42,8 +55,20 @@ public class BookAdapter extends ArrayAdapter<Book> {
         authorView.setText(a);
           pageCountView.setText(""+c);
 
+        Bitmap bit = currentBook.getBitmap();
+
+        ImageView imageView = (ImageView) listItemView.findViewById(R.id.item_image);
+
+        imageView.setImageBitmap(bit);
+
+
+
+
+
 
 
         return listItemView;
     }
+
+
 }

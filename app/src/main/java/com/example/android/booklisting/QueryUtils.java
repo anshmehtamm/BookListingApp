@@ -1,7 +1,9 @@
 package com.example.android.booklisting;
 
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.ImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -27,6 +30,7 @@ import static android.R.attr.author;
 
 public class QueryUtils  {
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
+
 
 
     public static List<Book> fetchBookData(String requestUrl) {
@@ -186,9 +190,11 @@ public class QueryUtils  {
                     JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
                     String thumbnailUrl = imageLinks.getString("smallThumbnail");
 
+                    Bitmap bitmap = ImageDownloader.fetchImage(thumbnailUrl);
 
 
-                    Book book = new Book(title, bookAuthorsString, url, pageCount,thumbnailUrl);
+
+                    Book book = new Book(title, bookAuthorsString, url, pageCount,bitmap);
 
                     books.add(book);
                 }
@@ -203,6 +209,8 @@ public class QueryUtils  {
 
         return books;
     }
+
+
 
 
 
