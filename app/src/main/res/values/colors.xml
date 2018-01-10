@@ -5,5 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="textColorBookName">#2B3D4D</color>
     <color name="textColorAuthorName">#B4BAC0</color>
-    <color name="textColorPrice">#00FF00</color>
+    <color name="textColorPrice">#000000</color>
 </resources>

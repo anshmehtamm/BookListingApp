@@ -1,7 +1,9 @@
 package com.example.android.booklisting;
 
 import android.app.LoaderManager;
+import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -11,8 +13,12 @@ import android.os.Bundle;
 
 import android.app.LoaderManager.LoaderCallbacks;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,7 +28,7 @@ public class SearchBooks extends AppCompatActivity implements LoaderManager.Load
 
     private static final String LOG_TAG = SearchBooks.class.getName();
     private static final String BOOKS_REQUEST_URL =
-            "https://www.googleapis.com/books/v1/volumes?q=flowers&maxResults=10";
+            "https://www.googleapis.com/books/v1/volumes?q=newyear&maxResults=10";
     private TextView mEmptyStateTextView;
 
     private static BookAdapter mAdapter;
@@ -36,6 +42,7 @@ public class SearchBooks extends AppCompatActivity implements LoaderManager.Load
         GridView booksGridView = (GridView) findViewById(R.id.gv);
 
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
+        mEmptyStateTextView.setText(R.string.search_book);
 
         booksGridView.setEmptyView(mEmptyStateTextView);
 
@@ -96,10 +103,33 @@ public class SearchBooks extends AppCompatActivity implements LoaderManager.Load
         Log.i(LOG_TAG,"Test: OnLoaderReset() called");
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search,menu);
+        MenuItem item = menu.findItem(R.id.menuSearch);
+        SearchView searchView = (SearchView)item.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
+            @Override
+            public boolean onQueryTextSubmit(String query){
+                mEmptyStateTextView.setVisibility(View.GONE);
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText){
+                mAdapter.getFilter().filter(newText);
+                return false;
+            }
 
-
-
+        });
+        return super.onCreateOptionsMenu(menu);
     }
+
+
+
+
+
+}
 

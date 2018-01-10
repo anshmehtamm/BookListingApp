@@ -19,13 +19,8 @@ public class ImageDownloader {
 
     public static Bitmap fetchImage(String thumbnailUrl){
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-        URL url = createUrl(thumbnailUrl);
+
 
         Bitmap bitmap = null;
         InputStream in = null;
@@ -39,15 +34,7 @@ public class ImageDownloader {
     }
 
 
-    private static URL createUrl(String stringUrl) {
-        URL url = null;
-        try {
-            url = new URL(stringUrl);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return url;
-    }
+
 
     private static InputStream OpenHttpConnection(String strURL)
             throws IOException {
